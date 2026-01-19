@@ -10,7 +10,7 @@ process run_fantasia {
     publishDir "${params.outdir}/${sample_id}", mode: 'copy'
 
     input:
-        tuple val(species), val(fasta)
+        tuple val(species), path(fasta)
 
     output:
         path "*"
