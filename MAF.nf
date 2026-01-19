@@ -15,13 +15,14 @@ process run_fantasia {
 
     script:
     """
-    cp ${fasta} ./${params.fantasia_dir}/inputs/${fasta}
+    # Nos movemos al directorio de Fantasia
     cd ${params.fantasia_dir}
 
+    # Ejecutamos Fantasia apuntando al FASTA en el work dir temporal
     python3 fantasia_pipeline.py \
         --serial-models \
         --embed-models prot_t5 \
-        /inputs/${fasta}
+        ${fasta.toAbsolutePath()}
     """
 }
 
