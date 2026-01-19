@@ -27,16 +27,14 @@ process run_fantasia {
 // Workflow block
 workflow {
 
-    Channel
-        .fromPath(params.input)
-        .splitCsv(header: true)
-        .map { row -> 
-            def sample_id = row[0]
-            def fasta = row[1]
-            tuple(sample_id, fasta)
-        }
-        .view { row -> "ID=${row.sample_id} FILE=${row.fasta}" }
-        .set { ch_samples }
+    ch_samples= Channel.fromPath(params.input)
+                        .splitCsv(header: true)
+                        .map { row -> 
+                            def sample_id = row[0]
+                            def fasta = row[1]
+                            tuple(sample_id, fasta)
+                        }
+                        .view { row -> "ID=${row.sample_id} FILE=${row.fasta}" }
 
     run_fantasia(ch_samples)
 }
