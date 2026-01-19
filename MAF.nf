@@ -3,7 +3,7 @@ nextflow.enable.dsl=2
 params.input = "./test/test.csv"
 params.fantasia_dir = "~/00_software/FantasiaLiteV0"
 params.outdir = "results"
-params.
+
 
 process run_fantasia {
 
@@ -18,11 +18,7 @@ process run_fantasia {
     script:
     """
     cd ${params.fantasia_dir}
-
-    python3 fantasia_pipeline.py \
-        --serial-models \
-        --embed-models prot_t5 \
-        ${fasta.toAbsolutePath()}
+    python3 fantasia_pipeline.py --serial-models --embed-models prot_t5 ${fasta}
     """
 }
 
