@@ -33,8 +33,8 @@ workflow {
         .map { row ->
             tuple(row.sample_id, file(row.fasta))
         }
-        .set { ch_samples }
         .view { row -> "ID=${row.sample_id} FILE=${row.fasta}" }
+        .set { ch_samples }
 
     run_fantasia(ch_samples)
 }
