@@ -8,12 +8,13 @@ process cpy_fasta {
         tuple val(species), path(fasta), val(fasta_path)
 
     output:
-        tuple val(species), path("${params.fantasia_dir}/fasta_tmp/${fasta}")
+        tuple val(species), path(fasta)
+
+    publishDir "${params.fantasia_dir}/fasta_tmp", mode: 'copy'
 
     script:
     """
-    mkdir -p ${params.fantasia_dir}/fasta_tmp
-    cp $fasta ${params.fantasia_dir}/fasta_tmp/${fasta}
+    echo "Archivo $fasta copiado"
     """
 }
 
@@ -30,7 +31,7 @@ process run_fantasia {
     script:
     """
     cd ${params.fantasia_dir}
-    python3 fantasia_pipeline.py --serial-models --embed-models prot_t5 /inputs/${fasta.getName()}
+    python3 fantasia_pipeline.py --serial-models --embed-models prot_t5 /fasta_tmp/${fasta.getName()}
     """
 }
 
