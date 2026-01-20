@@ -5,7 +5,7 @@ params.outdir = "results"
 process cpy_fasta {
 
     input:
-        tuple val(species), val(fasta)
+        tuple val(species), path(fasta_path), val(fasta)
 
     output:
         tuple val(species), path("fasta_tmp/*"), emit: fantasia_input
@@ -13,7 +13,7 @@ process cpy_fasta {
     script:
     """
     mkdir -p ${params.fantasia_dir}/fasta_tmp
-    cp ${fasta} ${params.fantasia_dir}/fasta_tmp/${fasta.getName()}
+    cp ${fasta_path} ${params.fantasia_dir}/fasta_tmp/${fasta.getName()}
     """
 }
 
@@ -40,7 +40,7 @@ workflow {
 
     ch_samples= Channel.fromPath(params.input)
                         .splitCsv(header: true)
-                        .map { row -> tuple(row.species, row.fasta) }
+                        .map { row -> tuple(row.species, file(row.fasta), row.fasta) }
 
     ch_inputs = cpy_fasta(ch_samples)
 }
