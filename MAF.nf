@@ -41,6 +41,7 @@ workflow {
     ch_samples= Channel.fromPath(params.input)
                         .splitCsv(header: true)
                         .map { row -> tuple(row.species, file(row.fasta), row.fasta) }
+                        .view()
 
-    ch_inputs = cpy_fasta(ch_samples)
+
 }
