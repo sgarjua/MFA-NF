@@ -1,6 +1,8 @@
 params.input = "./test/test.csv"
 params.fantasia_dir = "$HOME/00_software/FantasiaLiteV0"
 params.outdir = "results"
+params.dbsprot = "/data/shared_dbs/swissprot/uniprot_sprot_r2025_01.dmnd"
+params.dbtrembl = "/data/shared_dbs/swissprot/uniprot_trembl_r2025_01.dmnd"
 
 include { cpy_fasta } from './modules/run_FANTASIA.nf'
 include { run_fantasia } from './modules/run_FANTASIA.nf'
@@ -10,7 +12,7 @@ process run_diamond {
     publishDir "${params.outdir}/${species}", mode: 'copy'
 
     input:
-        tuple val(species), path(fasta)
+        tuple val(species), path(fasta), val(db)
 
     output:
         path "*"
@@ -34,6 +36,7 @@ workflow {
     // ch_fantasia_input = cpy_fasta(ch_samples)
     // run_fantasia(ch_fantasia_input)
 
-    run_diamond(ch_samples)
+    run_diamond(ch_samples,params.dbsprot)
+    run_diamond(ch_samples,params.dbtrembl)
 
 }
