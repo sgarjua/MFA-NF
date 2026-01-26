@@ -19,10 +19,8 @@ process run_diamond {
 
     script:
     """
-    dbname="${db.tokenize('/').last().replaceAll(/\\.dmnd$/, '')}"
-    
     mkdir -p ${params.outdir}/${species}
-    diamond blastp --query $fasta --db $db --outfmt 6 --max-target-seqs 1 --evalue 1e-20 --out ${params.outdir}/${species}.\$dbname.o6.txt --threads 24 --sensitive
+    diamond blastp --query $fasta --db $db --outfmt 6 --max-target-seqs 1 --evalue 1e-20 --out ${params.outdir}/${species}.${db.tokenize('/').last().replaceAll(/\\.dmnd$/, '')}.o6.txt --threads 24 --sensitive
     """
 }
 
