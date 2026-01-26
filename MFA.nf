@@ -42,6 +42,7 @@ workflow {
 
     ch_diamond_trembl = ch_samples.map { species, fasta ->
         tuple(species, fasta, params.dbtrembl)
+    }
 
     run_diamond(ch_diamond_sprot)
     run_diamond(ch_diamond_trembl)
