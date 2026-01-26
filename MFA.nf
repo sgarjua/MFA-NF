@@ -23,17 +23,7 @@ process run_diamond {
     """
 }
 
-workflow diamond_run {
 
-    take:
-        ch_input
-
-    main:
-        run_diamond(ch_input)
-
-    emit:
-        out = run_diamond.out
-}
 
 
 // Workflow block
@@ -47,15 +37,7 @@ workflow {
     // ch_fantasia_input = cpy_fasta(ch_samples)
     // run_fantasia(ch_fantasia_input)
 
-    ch_diamond_sprot = ch_samples.map { species, fasta ->
-        tuple(species, fasta, params.dbsprot)
-    }
-
-    ch_diamond_trembl = ch_samples.map { species, fasta ->
-        tuple(species, fasta, params.dbtrembl)
-    }
-
-    diamond_run(ch_diamond_sprot)
-    diamond_run(ch_diamond_trembl)
-
+    ch_dbs = Channel.of(params.dbsprot, params.dbtrembl)
+    ch_diamond = ch_samples.combine(ch_dbs)
+    run_diamond(ch_diamond)
 }
