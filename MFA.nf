@@ -36,7 +36,14 @@ workflow {
     // ch_fantasia_input = cpy_fasta(ch_samples)
     // run_fantasia(ch_fantasia_input)
 
-    run_diamond(ch_samples,params.dbsprot)
-    run_diamond(ch_samples,params.dbtrembl)
+    ch_diamond_sprot = ch_samples.map { species, fasta ->
+        tuple(species, fasta, params.dbsprot)
+    }
+
+    ch_diamond_trembl = ch_samples.map { species, fasta ->
+        tuple(species, fasta, params.dbtrembl)
+
+    run_diamond(ch_diamond_sprot)
+    run_diamond(ch_diamond_trembl)
 
 }
