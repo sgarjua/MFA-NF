@@ -34,12 +34,12 @@ process run_diamond {
         tuple val(species), path(fasta), path(db)
 
     output:
-        tuple val(species), path("${params.outdir}/${species}.${db.getName()}.o6.txt")
+        tuple val(species), path("${species}/${species}.${db.getName()}.o6.txt")
 
     script:
     """
     mkdir -p ${species}
-    diamond blastp --query $fasta --db $db --outfmt 6 --max-target-seqs 1 --evalue 1e-20 --out ${species}.${db.getName()}.o6.txt --threads 24 --sensitive
+    diamond blastp --query $fasta --db $db --outfmt 6 --max-target-seqs 1 --evalue 1e-20 --out ${species}/${species}.${db.getName()}.o6.txt --threads 24 --sensitive
     """
 }
 
