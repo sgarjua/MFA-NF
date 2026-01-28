@@ -51,7 +51,7 @@ process write_yaml {
     tuple val(species), path(fasta), path(trembl_tsv), path(sprot_tsv)
 
     output:
-    path "config.yaml"
+    path "config.yaml", val(species)
 
     script:
     """
@@ -92,7 +92,7 @@ process run_AHRD {
     publishDir "${params.outdir}/${species}", mode: 'copy'
 
     input:
-    path yaml_path
+    path yaml_path, val(species)
 
     output:
     path "${species}.proteins.funct_ahrd.tsv"
@@ -135,6 +135,6 @@ workflow {
                             sprot_tsv
                         )
                 }
-    yaml = write_yaml(grouped_ch)
-    run_AHRD(yaml)
+    ch_yaml = write_yaml(grouped_ch)
+    run_AHRD(ch_yaml)
 }
