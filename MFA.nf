@@ -106,8 +106,18 @@ workflow {
     ch_diamond = ch_samples2.combine(ch_dbs).view()
     ch_diamond_out = run_diamond(ch_diamond)
     grouped_ch = ch_diamond_out
-                .groupTuple(by: 0, 1)
-
+                .groupTuple(by: 0)
+                .map { species, fasta_list, hit_list ->
+                        def fasta = fasta_list[0]
+                        def trembl_tsv = hit_list.find { it.getName().contains('trembl') }
+                        def sprot_tsv = hit_list.find { it.getName().contains('sprot') }
+                        tuple(
+                            species,
+                            fasta,
+                            trembl_tsv,
+                            sprot_tsv
+                        )
+                }
                 .view()
-    write_yaml(grouped_ch)
+    w//rite_yaml(grouped_ch)
 }
