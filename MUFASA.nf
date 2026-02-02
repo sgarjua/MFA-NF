@@ -134,7 +134,6 @@ params.input = "./test/test.csv"
 params.outdir = "results"
 
 // FANTASIA parameters
-params.fantasia_dir = "$HOME/00_software/FantasiaLiteV0"
 params.fantasia_models = ["prot_t5"]
 
 // DIAMOND database paths
