@@ -148,7 +148,6 @@ nextflow run main.nf \
 ## Notes
 
 * All paths to external resources are **mandatory** for the corresponding module to run.
-* FANTASIA Lite module is optional; if not needed, no extra paths are required.
 * Modules can be enabled/disabled in the workflow logic.
 * Use `-resume` to continue a previous execution.
 * Increase `--JAVA_XMX` for large proteomes if necessary.
