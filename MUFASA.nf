@@ -10,7 +10,7 @@ params.fantasia_models = ["prot_t5"]
 // DIAMOND database paths
 params.dbsprot = "/data/shared_dbs/swissprot/uniprot_sprot_r2025_01.dmnd"
 params.dbtrembl = "/data/shared_dbs/swissprot/uniprot_trembl_r2025_01.dmnd"
-
+// DIAMOND parameters
 params.threads = 60
 params.evalue = 1e-20
 params.max_target_seqs = 1
