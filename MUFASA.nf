@@ -150,7 +150,6 @@ params.JAVA_XMX = "2g"   // sube a "8g" o más si lo necesitas
 
 
 // ================= MODULES ==================
-include { cpy_fasta } from './modules/run_FANTASIA.nf'
 include { run_fantasia } from './modules/run_FANTASIA.nf'
 include { run_diamond } from './modules/run_HOMOLOGY.nf'
 include { write_yaml } from './modules/run_HOMOLOGY.nf'
@@ -160,7 +159,7 @@ include { run_AHRD } from './modules/run_HOMOLOGY.nf'
 // ================= WORKFLOW DEFINITION ==================
 workflow {
 
-    ch_samples= Channel.fromPath(params.input)
+    ch_samples = Channel.fromPath(params.input)
                         .splitCsv(header: true)
                         .map { row -> tuple(row.species, file(row.fasta)) }
 
