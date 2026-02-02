@@ -1,11 +1,11 @@
-# MuFASA (MFA) — Multi-Functional Annotation Pipeline
+# MuFASA — Multi-source Functional Annotation and Support Analysis
 
 MuFASA is a **Nextflow pipeline** for protein functional annotation. It integrates **two independent annotation modules**:
 
 1. **Homology-based annotation** using **DIAMOND** and **AHRD**
 2. **Embedding-based annotation** using **FANTASIA Lite**
 
-Each module requires **external resources**, and paths to these resources must be provided.
+Each module requires **external resources**, and paths to these resources must be provided for the module to run.
 
 ---
 
@@ -28,7 +28,7 @@ Each module requires **external resources**, and paths to these resources must b
 * **Java** (for AHRD)
 * **Python 3** (for FANTASIA Lite)
 * **DIAMOND** installed and available in `$PATH`
-* **FANTASIA Lite** installed and accessible
+* **FANTASIA Lite** installed and accessible (optional)
 * Required databases and annotation files: SwissProt, TrEMBL, GOA, AHRD resources
 
 ---
@@ -49,7 +49,7 @@ cd MuFASA
 conda install -c bioconda diamond
 ```
 
-3. Make sure Java and Python 3 are available:
+3. Ensure Java and Python 3 are available:
 
 ```bash
 java -version
@@ -119,12 +119,6 @@ Performs sequence similarity searches with DIAMOND and functional refinement wit
 
 Performs protein functional annotation using embedding models from FANTASIA Lite.
 
-**Required parameter:**
-
-| Parameter        | Description                                  |
-| ---------------- | -------------------------------------------- |
-| `--fantasia_dir` | Path to FANTASIA Lite installation directory |
-
 **Optional parameter:**
 
 | Parameter           | Description                     | Default |
@@ -144,15 +138,17 @@ nextflow run main.nf \
     --GO_GAF /path/to/goa.gaf \
     --UNIPROT_SPROT /path/to/sprot.fasta \
     --UNIPROT_TREMBL /path/to/trembl.fasta \
-    --AHRD_JAR /path/to/ahrd.jar \
-    --fantasia_dir /path/to/FantasiaLite
+    --AHRD_JAR /path/to/ahrd.jar
+    --fantasia_models prot_t5
 ```
+
 
 ---
 
 ## Notes
 
 * All paths to external resources are **mandatory** for the corresponding module to run.
-* Modules can be enabled/disabled in the workflow logic if needed.
+* FANTASIA Lite module is optional; if not needed, no extra paths are required.
+* Modules can be enabled/disabled in the workflow logic.
 * Use `-resume` to continue a previous execution.
 * Increase `--JAVA_XMX` for large proteomes if necessary.
