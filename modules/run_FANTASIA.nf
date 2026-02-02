@@ -31,6 +31,6 @@ process run_fantasia {
         --serial-models \
         --embed-models ${params.fantasia_models.join(' ')} \
         --results-csv ${species}.fantasia_results.csv \
-        fasta_tmp/${fasta.getName()}
+        ${fasta.getName()}
     """
 }
