@@ -13,7 +13,7 @@ process run_fantasia {
     """
     fantasia_pipeline \
         --serial-models \
-        --embed-models ${params.fantasia_models.join(' ')} \
+        --embed-models ${params.fantasia_models} \
         --results-csv ${species}.fantasia_results.csv \
         ${fasta.getName()}
     """
