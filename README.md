@@ -28,7 +28,7 @@ Each module requires **external resources**, and paths to these resources must b
 * **Java** (for AHRD)
 * **Python 3** (for FANTASIA Lite)
 * **DIAMOND** installed and available in `$PATH`
-* **FANTASIA Lite** installed and accessible (optional)
+* **FANTASIA Lite** installed and accessible
 * Required databases and annotation files: SwissProt, TrEMBL, GOA, AHRD resources
 
 ---
