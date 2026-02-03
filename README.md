@@ -97,7 +97,7 @@ test/test.csv
 Run the pipeline with **all required resources**:
 
 ```bash
-nextflow run main.nf \
+nextflow run MUFANN.nf \
     --input test/test.csv \
     --outdir results \
     --dbsprot /path/to/uniprot_sprot.dmnd \
