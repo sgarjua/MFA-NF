@@ -1,11 +1,30 @@
-# MuFAnn — Multi-source Functional Annotation
+# MuFAnn — Multi-source Functional Annotation Pipeline
 
-MuFASA is a **Nextflow pipeline** for protein functional annotation. It integrates **two independent annotation modules**:
+MuFAnn is a **Nextflow pipeline** for comprehensive **protein functional annotation**. It helps researchers assign **biological functions** to protein sequences, which is essential for understanding genomes, metagenomes, and proteomes.
 
-1. **Homology-based annotation** using **DIAMOND** and **AHRD**
-2. **Embedding-based annotation** using **FANTASIA Lite**
+The pipeline combines **two complementary strategies**:
+
+1. **Homology-based annotation (DIAMOND + AHRD)**
+
+   * Compares proteins to **SwissProt and TrEMBL databases** using DIAMOND.
+   * Refines functional descriptions with **AHRD** and assigns **Gene Ontology (GO) terms**.
+   * Provides **high-confidence annotations** for proteins with close homologs.
+
+2. **Embedding-based annotation (FANTASIA Lite, optional)**
+
+   * Uses **machine-learning protein embeddings** to predict functions.
+   * Complements homology-based results for proteins with **few or no close homologs**.
 
 Each module requires **external resources**, and paths to these resources must be provided for the module to run.
+
+**Key outputs:**
+
+* Functional descriptions per protein
+* GO terms (molecular function, biological process, cellular component)
+* Standardized, curated results for downstream analysis
+
+**Applications:** genome and metagenome annotation, enzyme discovery, comparative genomics, and large-scale protein analysis.
+
 <img width="1357" height="616" alt="04f033ea-1810-400c-ba25-d3d6216e353b" src="https://github.com/user-attachments/assets/213cbd52-8128-4b0a-b466-af46c4de7ada" />
 
 ---
