@@ -73,7 +73,6 @@ Each module requires external resources:
 | `--FILTER_TREMBL`   | AHRD TrEMBL filter file                               |
 | `--TOKEN_BLACKLIST` | AHRD token blacklist file                             |
 | `--AHRD_JAR`        | Path to AHRD JAR file                                 |
-| `--fantasia_dir`    | Path to FANTASIA Lite installation directory          |
 
 ### Optional parameters
 
@@ -111,7 +110,6 @@ nextflow run main.nf \
     --FILTER_TREMBL /path/to/filter_descline_trembl.txt \
     --TOKEN_BLACKLIST /path/to/blacklist_token.txt \
     --AHRD_JAR /path/to/ahrd.jar \
-    --fantasia_dir /path/to/FantasiaLite
 ```
 
 * Results will be written in the `results/` folder.
