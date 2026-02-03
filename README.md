@@ -6,7 +6,7 @@ MuFASA is a **Nextflow pipeline** for protein functional annotation. It integrat
 2. **Embedding-based annotation** using **FANTASIA Lite**
 
 Each module requires **external resources**, and paths to these resources must be provided for the module to run.
-<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/f152fc4b-6a33-4a1b-9808-f95e08987cd6" />
+<img width="1357" height="616" alt="04f033ea-1810-400c-ba25-d3d6216e353b" src="https://github.com/user-attachments/assets/213cbd52-8128-4b0a-b466-af46c4de7ada" />
 
 ---
 
