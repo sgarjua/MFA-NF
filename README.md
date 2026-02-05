@@ -21,31 +21,114 @@ The pipeline integrates **two complementary modules**:
 * GO terms (molecular function, biological process, cellular component)
 * Curated, standardized results ready for downstream analysis
 <img width="1357" height="616" alt="04f033ea-1810-400c-ba25-d3d6216e353b" src="https://github.com/user-attachments/assets/213cbd52-8128-4b0a-b466-af46c4de7ada" />
+
 ---
 
-## Dependencies
 
-MuFASA requires the following software:
+## Installation
 
-* **Java** 17+ — required for **AHRD** and **Nextflow** — [Java downloads](https://www.oracle.com/java/technologies/javase-downloads.html)
-* **Nextflow** ≥ 22.x — [Nextflow installation guide](https://www.nextflow.io/docs/latest/getstarted.html)
-* **Python 3** — required for **FANTASIA Lite** — [Python downloads](https://www.python.org/downloads/)
-* **DIAMOND** ≥ 2.x — [DIAMOND GitHub](https://github.com/bbuchfink/diamond)
-* **FANTASIA Lite** — [FANTASIA GitHub](https://github.com/CBBIO/FANTASIA-Lite)
-* **AHRD** — [AHRD GitHub](https://github.com/groupschoof/AHRD)
+MuFAnn is implemented as a **Nextflow pipeline** that integrates two mandatory annotation strategies:
 
-### Databases and resources
+* **Homology-based annotation** (DIAMOND + AHRD)
+* **Deep-learning–based annotation** (FANTASIA-Lite)
 
-Each module requires external resources:
+All external tools must be installed manually before running the pipeline.
 
-1. **Homology-based annotation (DIAMOND + AHRD):**
-   Required databases and annotation files are detailed in the official documentation of [DIAMOND](https://github.com/bbuchfink/diamond) and [AHRD](https://github.com/groupschoof/AHRD).
+---
 
-2. **Embedding-based annotation (FANTASIA Lite):**
-   Pre-trained models and input requirements are detailed in the [FANTASIA Lite documentation](https://github.com/CBBIO/FANTASIA-Lite).
+## 1. Java (required by Nextflow)
 
-> ⚠️ All resources referenced in the respective documentation are mandatory for the corresponding module to run successfully.
+Nextflow **requires Java 17 or later**. The recommended installation method is **SDKMAN**.
 
+```bash
+curl -s https://get.sdkman.io | bash
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+sdk install java 17.0.10-tem
+```
+
+Verify:
+
+```bash
+java -version
+```
+
+---
+
+## 2. Nextflow
+
+Nextflow is distributed as a single executable.
+
+```bash
+curl -s https://get.nextflow.io | bash
+chmod +x nextflow
+sudo mv nextflow /usr/local/bin/
+```
+
+Verify:
+
+```bash
+nextflow -version
+```
+
+---
+
+## 3. BLAST and DIAMOND
+
+Required for homology-based annotation.
+
+```bash
+conda install -y -c bioconda blast diamond
+```
+
+Verify:
+
+```bash
+blastp -version
+diamond version
+```
+
+---
+
+## 4. FANTASIA-Lite
+
+Clone the official repository and install its Python dependencies.
+
+```bash
+git clone https://github.com/CBBIO/FANTASIA-Lite.git
+conda create -y -n fantasia python=3.9
+conda activate fantasia
+pip install -r FANTASIA-Lite/requirements.txt
+conda deactivate
+```
+
+Repository:
+[https://github.com/CBBIO/FANTASIA-Lite](https://github.com/CBBIO/FANTASIA-Lite)
+
+---
+
+## 5. AHRD
+
+Clone the AHRD repository.
+
+```bash
+git clone https://github.com/groupschoof/AHRD.git
+```
+
+AHRD is a Java application and does not require compilation.
+
+Repository:
+[https://github.com/groupschoof/AHRD](https://github.com/groupschoof/AHRD)
+
+---
+
+## 6. MuFAnn pipeline
+
+Clone the pipeline repository:
+
+```bash
+git clone https://github.com/sgarjua/MuFAnn.git
+cd MuFAnn
+```
 
 
 ## Input
