@@ -34,9 +34,8 @@ MuFAnn is implemented as a **Nextflow pipeline** that integrates two mandatory a
 
 All external tools must be installed manually before running the pipeline.
 
----
 
-## 1. Java (required by Nextflow)
+### 1. Java (required by Nextflow)
 
 Nextflow **requires Java 17 or later**. The recommended installation method is **SDKMAN**.
 
@@ -52,9 +51,8 @@ Verify:
 java -version
 ```
 
----
 
-## 2. Nextflow
+### 2. Nextflow
 
 Nextflow is distributed as a single executable.
 
@@ -70,9 +68,8 @@ Verify:
 nextflow -version
 ```
 
----
 
-## 3. BLAST and DIAMOND
+### 3. BLAST and DIAMOND
 
 Required for homology-based annotation.
 
@@ -87,9 +84,8 @@ blastp -version
 diamond version
 ```
 
----
 
-## 4. FANTASIA-Lite
+### 4. FANTASIA-Lite
 
 Clone the official repository and install its Python dependencies.
 
@@ -104,9 +100,9 @@ conda deactivate
 Repository:
 [https://github.com/CBBIO/FANTASIA-Lite](https://github.com/CBBIO/FANTASIA-Lite)
 
----
 
-## 5. AHRD
+
+### 5. AHRD
 
 Clone the AHRD repository.
 
@@ -119,9 +115,9 @@ AHRD is a Java application and does not require compilation.
 Repository:
 [https://github.com/groupschoof/AHRD](https://github.com/groupschoof/AHRD)
 
----
 
-## 6. MuFAnn pipeline
+
+### 6. MuFAnn pipeline
 
 Clone the pipeline repository:
 
@@ -130,13 +126,13 @@ git clone https://github.com/sgarjua/MuFAnn.git
 cd MuFAnn
 ```
 
+---
 
 ## Input
 
 * A CSV file describing the samples/proteomes to annotate (e.g., `test/test.csv`).
 * Each row must include at least: `species` and `fasta` file path.
 
----
 
 ## Usage
 
